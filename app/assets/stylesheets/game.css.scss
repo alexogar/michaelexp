@@ -1,0 +1,96 @@
+// Place all the styles related to the Game controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.game {
+	.board {
+		position: relative;
+		width: 300px;
+		margin-top : -100px;
+		height: 215px;
+	}
+	
+	.start_waiting {
+		background: url('/assets/start_bar_loading.gif') 100px 100px no-repeat;
+		width: 300px;
+		height: 215px;
+	}
+	
+	.table {
+		background: url("/assets/table.png") no-repeat scroll 200px 200px transparent;
+		height: 215px;
+		padding: 200px 200px 0px 200px;
+		width: 300px;
+		
+		.bank_bid_container {
+			color: yellow;
+			margin: 80px;
+    		width: 200px;
+		}
+	}
+	
+	.player {
+		position:absolute;
+		width: 100px;
+		padding-top: 60px;
+		text-align: center;
+		
+		span {
+			padding-top : 70px;
+		}
+		
+		span.loading {
+			background: url("/assets/user-loading.gif") no-repeat;
+			position: absolute;
+			width: 20px;
+			height: 20px;
+			top: 14px;
+			left: 42px;
+		}
+		
+		.player_decision {
+			left: 100px;
+		    position: absolute;
+		    top: 20px;
+		    width: 100px;
+		}
+	}
+	
+	.player.male {
+		background: url('/assets/male_icon.png') 20px 0px no-repeat;
+	}
+	
+	.player.female {
+		background: url('/assets/female_icon.png') 20px 0px no-repeat;		
+	}
+	
+	.player1 {
+		top: 255px;
+		left: 100px;
+		.player_decision {
+			left: -100px;
+		    position: absolute;
+		    top: 20px;
+		    width: 100px;
+		}
+	}
+	
+	.player2 {
+		top: 100px;
+		left: 295px;
+	}
+	
+	.player3 {
+		top: 255px;
+		left: 490px;
+	}
+	
+	.user {
+		top: 410px;
+		left: 295px;
+	}
+	
+	.bid_controls, .des_controls {
+		padding-top : 30px;
+	}
+}

@@ -1,0 +1,53 @@
+<%= form_tag('/questions/secondSubmit') do -%>
+<p style="width:600px">
+Спасибо за Вашу игру. Пожалуйста, ответьте на ряд вопросов. На первые 6 вопросов необходимо дать приблизительный численный ответ. Рядом указывается число, которое дал другой игрок на этот вопрос, когда отвечал на них в середине игры. Ваши ответы также показываются другим игрокам. Инструкция для оставшихся вопросов, будет предъявлена позднее.
+</p>
+<p>
+1. По-Вашему, какова средняя длина голубого кита (в метрах)? 
+Игрок 1 считает, что средняя длина голубого кита около 5 метров.
+</p>
+<p>	Ответ: <%=text_field_tag 'question1'%>метров<span id="error1"/></p><p>
+2. Как Вы думаете, сколько процентов всего времени жизни человек тратит на сон? 
+Игрок 2 считает, что человек тратит на сон около 63% всего времени жизни
+</p>
+<p>	Ответ: <%=text_field_tag 'question2'%>%<span id="error2"/></p><p>
+3. Как Вы полагаете, сколько процентов всего запаса воды хранится в Антарктиде? 
+Игрок 3, считает, что около 92% всего запаса воды на Земле хранится во льдах Антарктиды
+</p>
+<p>	Ответ: <%=text_field_tag 'question3'%>%<span id="error3"/></p><p>
+4. При какой температуре, по-Вашему, кипит вода на Эвересте? 
+Игрок 1 считает, что при температуре около 145 градусов по Цельсию
+</p>
+<p>	Ответ: <%=text_field_tag 'question4'%>градусов<span id="error4"/></p><p>
+5. Как Вы полагаете, сколько, в среднем, маленьких ежиков рожает ежиха за один раз? 
+Игрок 2 считает, что в среднем ежиха за один раз рожает около 18 маленьких ежиков.
+</p>
+<p>	Ответ: <%=text_field_tag 'question5'%>ежиков<span id="error5"/></p><p>
+6. Какова, по Вашему мнению, длина реки Дунай? 
+Игрок 3 считает, что длина реки Дунай приблизительно равна 32 км.</p>
+<p>	Ответ: <%=text_field_tag 'question6'%>км<span id="error6"/></p><p>
+	
+	  <div><%= submit_tag 'Готово' %></div>
+<%end%>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+	var field1 = new LiveValidation( 'question1', {insertAfterWhatNode: "error1" } );
+	field1.add( Validate.Presence );
+	field1.add( Validate.Numericality, { minimum: 0 } );
+	var field2 = new LiveValidation( 'question2', {insertAfterWhatNode: "error2" } );
+	field2.add( Validate.Presence );
+	field2.add( Validate.Numericality, { minimum: 0, maximum: 100 } );
+	var field3 = new LiveValidation( 'question3', {insertAfterWhatNode: "error3" } );
+	field3.add( Validate.Presence );	
+	field3.add( Validate.Numericality, { minimum: 0, maximum: 100 } );
+	var field4 = new LiveValidation( 'question4', {insertAfterWhatNode: "error4" } );
+	field4.add( Validate.Presence );
+	field4.add( Validate.Numericality, { minimum: 0 } );
+	var field5 = new LiveValidation( 'question5', {insertAfterWhatNode: "error5" } );
+	field5.add( Validate.Presence );
+	field5.add( Validate.Numericality, { minimum: 0 } );
+	var field6 = new LiveValidation( 'question6', {insertAfterWhatNode: "error6" } );
+	field6.add( Validate.Presence );
+	field6.add( Validate.Numericality, { minimum: 0 } );
+});
+</script>

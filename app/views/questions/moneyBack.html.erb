@@ -1,0 +1,32 @@
+
+<p>
+Игрок 1 дал Вам <%=@game.players[0].money/3%> рублей. Таким образом, Вы получили <%=@game.players[0].money%> рублей от игрока 1.
+</p>
+<p>
+Игрок 2 дал Вам <%=@game.players[1].money/3%> рублей. Таким образом, Вы получили <%=@game.players[1].money%> рублей от игрока 2.
+</p>
+<p>
+Игрок 3 дал Вам <%=@game.players[2].money/3%> рублей. Таким образом, Вы получили <%=@game.players[2].money%> рублей от игрока 3.
+</p>
+
+<%= form_tag('/questions/moneyBackSubmit') do -%>
+<p>
+	Сколько вы хотели бы отдать обратно игрокам?
+	У вас на счету : <%=@game.current_player.money%>
+</p>
+<p>
+Сколько Вы хотите отдать игроку 1? 
+</p><p>
+<%=text_field_tag 'player1'%>
+</p><p>
+Сколько Вы хотите отдать игроку 2?
+</p><p>
+<%=text_field_tag 'player2'%>
+</p><p>
+Сколько Вы хотите отдать игроку 3?
+</p><p>
+<%=text_field_tag 'player3'%>
+</p><p>
+<div><%= submit_tag 'Далее' %></div>
+</p>
+<%end%>

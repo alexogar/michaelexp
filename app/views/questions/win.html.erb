@@ -1,0 +1,29 @@
+ИТАК!!
+ИГРА И ТЕСТ ЗАКОНЧЕНЫ!
+Победил: <%=@winner%>
+
+Результаты
+<table>
+	<tr>
+		<td>Вы
+		</td>
+		<td><%=@game.current_player.money%></td>
+	</tr>
+	<tr>
+		<td>Игрок 1
+		</td>
+		<td><%=@game.players[0].money%></td>
+	</tr>
+	<tr>
+		<td>Игрок 2
+		</td>
+		<td><%=@game.players[1].money%></td>
+	</tr>
+	<tr>
+		<td>Игрок 3
+		</td>
+		<td><%=@game.players[2].money%></td>
+	</tr>
+</table>
+
+<%=@user.result%>

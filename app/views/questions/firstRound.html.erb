@@ -1,0 +1,32 @@
+<%= form_tag('/questions/firstSubmit') do -%>
+
+<p style="width:600px">Закончился первый круг игры. Сейчас передохните немного от игры и ответьте, пожалуйста, на ряд вопросов.  На каждый вопрос необходимо дать приблизительный численный ответ, наиболее точно соответствующий Вашим представлениям.</p>
+<p>
+1. Как Вы думаете, сколько процентов поверхности Земли занимают горы?    
+</p>
+<p>	Ответ: <%=text_field_tag 'question1'%>%<span id="error1"/></p><p>
+2. Сколько процентов жителей Брянской области, на Ваш взгляд, имеют высшее образование?</p>
+<p>	Ответ: <%=text_field_tag 'question2'%>%<span id="error2"/></p>
+<p>3. Сколько процентов земной поверхности занимают реки?</p>
+<p>	Ответ: <%=text_field_tag 'question3'%>%<span id="error3"/></p>
+<p>4. Сколько весит яйцо синицы в граммах? </p>
+<p>	Ответ: <%=text_field_tag 'question4'%>граммов<span id="error4"/></p>
+
+  <div><%= submit_tag 'Готово' %></div>
+<% end -%>
+
+<script type="text/javascript">
+jQuery(document).ready(function() {
+	var field1 = new LiveValidation( 'question1', {insertAfterWhatNode: "error1" } );
+	field1.add( Validate.Presence );
+	field1.add( Validate.Numericality, { minimum: 0, maximum: 100 } );
+	var field2 = new LiveValidation( 'question2', {insertAfterWhatNode: "error2" } );
+	field2.add( Validate.Presence );
+	field2.add( Validate.Numericality, { minimum: 0, maximum: 100 } );
+	var field3 = new LiveValidation( 'question3', {insertAfterWhatNode: "error3" } );
+	field3.add( Validate.Presence );	
+	field3.add( Validate.Numericality, { minimum: 0, maximum: 100 } );
+	var field4 = new LiveValidation( 'question4', {insertAfterWhatNode: "error4" } );
+	field4.add( Validate.Presence );
+});
+</script>

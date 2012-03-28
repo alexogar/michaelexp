@@ -1,0 +1,39 @@
+<div class="game" id="<%=@game.id%>">
+
+<div class="start_waiting">
+	<span class="loading_message"/>
+</div>
+<div id="round_counter">
+	Раунд <span>1</span>
+</div>
+<div class="board" id="game_board" style="display:none">
+	<div class="player1 player ai male"><span class="player_nick">Игрок 1</span><span class="loading" style="display:none"></span>
+		<div class="player_money"></div>
+		<div class="player_decision"></div>	
+	</div>
+	<div class="player2 player ai female"><span class="player_nick">Игрок 2</span><span class="loading" style="display:none"></span>
+		<div class="player_money"></div>
+		<div class="player_decision"></div>
+	</div>
+	<div class="player3 player ai male"><span class="player_nick">Игрок 3</span><span class="loading" style="display:none"></span>
+		<div class="player_money"></div>
+		<div class="player_decision"></div>	
+	</div>
+
+	<div class="table">
+		<div class="bank_bid_container">Ставка сейчас:<span id="bank_bid">50</span></div>
+	</div>
+	<div class="user player <%=@user.sex.downcase%>"><span>Я</span><div class="user_money"></div></div>
+	<div id="des_controls" class="des_controls" style="display:none">
+		Coбщить соперникам что вы делаете ставку?
+		<button id="des_make_bid">Да</button>
+		<button id="des_not_make_bid">Нет</button>
+	</div>
+	<div id="bid_controls" class="bid_controls" style="display:none">
+		Будете делать ставку?
+		<button id="make_bid">Да</button>
+		<button id="not_make_bid">Нет</button>
+	</div>
+</div>
+
+</game>
