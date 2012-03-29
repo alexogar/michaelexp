@@ -296,8 +296,9 @@ var Game = Class.$extend({
 		return this.game_id;
 	}
 })
-
-window.game = Game();
-window.game.start();
+if (window.game == null) {
+	window.game = Game();
+	window.game.start();
+}
 
 });

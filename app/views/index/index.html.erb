@@ -15,12 +15,12 @@
 </p>
 <%= form_for @user, :url => { :action => "proceed_next" } do |f| %>
 	<%= f.error_messages %>
-	<p><%= f.label :name%>
+	<p><%= f.label :name, "Имя"%>
 	<%= f.text_field :name%></p>
-	<p><%= f.label :age%>
+	<p><%= f.label :age, "Возраст"%>
 	<%= f.text_field :age%></p>
-	<p><%= f.label :sex%>
-	<% [ 'Male', 'Female' ].each do |sex| %>
+	<p><%= f.label :sex, "Пол"%>
+	<% [ 'Female', 'Male' ].each do |sex| %>
 	      <br><%= f.radio_button :sex, sex %>
 	      <%= sex.humanize %>
     <% end %></p>

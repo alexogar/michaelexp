@@ -25,6 +25,7 @@ class GameController < ApplicationController
     attr_accessor :timer_enabled,
                   :name,
                   :next_state,
+                  :questions_done,
                   :desision_controls_enabled,
                   :bid_controls_enabled,
                   :waiting_enabled,
@@ -35,9 +36,10 @@ class GameController < ApplicationController
     
     def initialize
       @name = "bid_conversation"
-      @round_count = 0
+      @round_count = 1
       @bid = 50
       @waiting = false
+      @questions_done = false
       @desision_controls_enabled = false
       @bid_controls_enabled = false
       @timer_enabled = false
@@ -106,7 +108,7 @@ private
       g.state.name = "waiting"
       g.state.next_state = "bid"
       g.current_player.desisions.push(ga)
-     
+      g.state.round_count = g.state.round_count+1
     elsif (ga == 'bid' || ga == 'not_bid')
       g.state.bid = bid
       g.state.name = "waiting"
@@ -134,6 +136,7 @@ private
         end
         g.current_player.money = g.current_player.money+bid*4
       end
+            
     end
     
     g = process_game(g)
@@ -142,21 +145,19 @@ private
 
   def process_game(g)
 
-    if g.state.name == 'bid_conversation'      
-      
+    if (g.state.round_count==10 && !g.state.questions_done)
+      g.state.name = "questions1"
+      g.state.questions_done = true
+      return g        
+    end
+    
+    if (g.state.round_count==20)
+      g.state.name = "questions2"
       g.state.round_count = g.state.round_count+1
-      
-      if (g.state.round_count==10)
-        g.state.name = "questions1"
-        g.state.round_count = g.state.round_count-1
-        return g        
-      end
-      
-      if (g.state.round_count==20)
-        g.state.name = "questions2"
-        g.state.round_count = g.state.round_count-1
-        return g        
-      end
+      return g        
+    end
+
+    if g.state.name == 'bid_conversation'                         
       
       g.state.desision_controls_enabled = true
       g.state.timer_enabled = true
