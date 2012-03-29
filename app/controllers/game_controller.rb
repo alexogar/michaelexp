@@ -108,7 +108,7 @@ private
       g.state.name = "waiting"
       g.state.next_state = "bid"
       g.current_player.desisions.push(ga)
-      g.state.round_count = g.state.round_count+1
+
     elsif (ga == 'bid' || ga == 'not_bid')
       g.state.bid = bid
       g.state.name = "waiting"
@@ -136,7 +136,7 @@ private
         end
         g.current_player.money = g.current_player.money+bid*4
       end
-            
+                  g.state.round_count = g.state.round_count+1
     end
     
     g = process_game(g)
