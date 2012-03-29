@@ -15,6 +15,8 @@ Psychtest::Application.routes.draw do
   match 'game' => 'game#game'
   match 'start' => 'index#index'
   match 'proceed' => 'index#proceed_next'
+  
+  root :to => 'index#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
