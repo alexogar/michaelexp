@@ -17,16 +17,30 @@
 <p>
 Сколько Вы хотите отдать игроку 1? 
 </p><p>
-<%=text_field_tag 'player1'%>
+<%=text_field_tag 'player1'%><span id="error1"/></p>
 </p><p>
 Сколько Вы хотите отдать игроку 2?
 </p><p>
-<%=text_field_tag 'player2'%>
+<%=text_field_tag 'player2'%><span id="error2"/></p>
 </p><p>
 Сколько Вы хотите отдать игроку 3?
 </p><p>
-<%=text_field_tag 'player3'%>
+<%=text_field_tag 'player3'%><span id="error3"/></p>
 </p><p>
 <div><%= submit_tag 'Далее' %></div>
 </p>
+
+<script type="text/javascript">
+jQuery(document).ready(function() {
+	var field1 = new LiveValidation( 'player1', {insertAfterWhatNode: "error1" } );
+	field1.add( Validate.Presence );
+	field1.add( Validate.Numericality, { minimum: 0, maximum :<%=@game.players[0].money%> } );
+	var field2 = new LiveValidation( 'player2', {insertAfterWhatNode: "error2" } );
+	field2.add( Validate.Presence );
+	field2.add( Validate.Numericality, { minimum: 0, maximum: <%=@game.players[1].money%> } );
+	var field3 = new LiveValidation( 'player3', {insertAfterWhatNode: "error3" } );
+	field3.add( Validate.Presence );	
+	field3.add( Validate.Numericality, { minimum: 0, maximum: <%=@game.players[2].money%> } );
+});
+</script>
 <%end%>

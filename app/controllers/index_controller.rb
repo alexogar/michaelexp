@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class IndexController < ApplicationController
   
   skip_filter :redirector

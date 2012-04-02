@@ -1,13 +1,17 @@
+# -*- encoding : utf-8 -*-
 Psychtest::Application.routes.draw do
   get "questions/moneyChange"
   post "questions/moneySubmit"
   get "questions/firstRound"
   post "questions/firstSubmit"
   get "questions/lastRound"
+  match "questions/lastSubmit" => 'questions#secondSubmit'
   post "questions/secondSubmit"
   get "game/details"
   get "questions/moneyBack"
   post "questions/moneyBackSubmit"
+  get "questions/lastSituations"
+  post "questions/lastSituationsSubmit"
   
   match 'win' => 'questions#win'
   match 'game/status/:id' => 'game#status'

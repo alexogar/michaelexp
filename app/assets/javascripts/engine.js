@@ -15,6 +15,19 @@ var Visitor = Class.$extend({
 	
 });
 
+var Countdown = Visitor.$extend({
+	__init__ : function() {
+		this.$super("Countdow")
+	},
+	
+	
+	
+	visit : function(game,game_engine,game_object) {
+		//time to countdown in seconds, and element ID
+		
+	}
+});
+
 var QuestionsRedirector = Visitor.$extend({
 	__init__ : function() {
 		this.$super("Questions redirector");
@@ -282,6 +295,7 @@ var Game = Class.$extend({
 		this.game_engine.addVisitor(UpdateBankAndPlayersMoney());
 		this.game_engine.addVisitor(UpdateAIPlayersDescisions());
 		this.game_engine.addVisitor(QuestionsRedirector());
+		this.game_engine.addVisitor(Countdown());
 	},
 	
 	start : function() {
@@ -296,9 +310,12 @@ var Game = Class.$extend({
 		return this.game_id;
 	}
 })
+
 if (window.game == null) {
 	window.game = Game();
 	window.game.start();
 }
+
+
 
 });

@@ -1,4 +1,13 @@
+# -*- encoding : utf-8 -*-
+
+class Time
+  def to_ms
+    (self.to_f * 1000.0).to_i
+  end
+end
 class GameController < ApplicationController
+  
+  
   
   class Player
     attr_accessor :name,:money,:desisions, :bids
@@ -136,7 +145,7 @@ private
         end
         g.current_player.money = g.current_player.money+bid*4
       end
-                  g.state.round_count = g.state.round_count+1
+      g.state.round_count = g.state.round_count+1
     end
     
     g = process_game(g)
@@ -145,13 +154,13 @@ private
 
   def process_game(g)
 
-    if (g.state.round_count==10 && !g.state.questions_done)
+    if (g.state.round_count==11 && !g.state.questions_done)
       g.state.name = "questions1"
       g.state.questions_done = true
       return g        
     end
     
-    if (g.state.round_count==20)
+    if (g.state.round_count==21)
       g.state.name = "questions2"
       g.state.round_count = g.state.round_count+1
       return g        
@@ -160,6 +169,7 @@ private
     if g.state.name == 'bid_conversation'                         
       
       g.state.desision_controls_enabled = true
+      g.state.bid_controls_enabled = false
       g.state.timer_enabled = true
     
     elsif g.state.name == 'waiting'
@@ -170,8 +180,8 @@ private
       g.state.waiting_enabled = true
       
       if (g.state.waiting_time != nil) 
-        if (g.state.waiting_time+g.state.waiting_duration >= Date.new)
-          logger.debug("Stop waiting proceed to next state"+g.state.next_state)
+        if (g.state.waiting_time.to_ms+g.state.waiting_duration <= Time.now.to_ms)
+          logger.debug("Stop waiting proceed to next state"+(g.state.waiting_time.to_ms+g.state.waiting_duration).to_s)
           g.state.name = g.state.next_state
           g.state.next_state = nil
           g.state.waiting_enabled = false
@@ -181,7 +191,7 @@ private
           process_game(g)     
         end
       else
-        g.state.waiting_time = Date.new
+        g.state.waiting_time = Time.now
         g.state.waiting_duration = (1..30).to_a[rand(30)]*1000
 
       end

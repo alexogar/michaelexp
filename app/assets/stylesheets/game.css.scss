@@ -24,7 +24,8 @@
 		
 		.bank_bid_container {
 			color: yellow;
-			margin: 80px;
+			margin-top: 65px;
+			margin-left: 90px;
     		width: 200px;
 		}
 	}
@@ -92,5 +93,23 @@
 	
 	.bid_controls, .des_controls {
 		padding-top : 30px;
+	}
+	
+	#des_not_make_bid, #not_make_bid {
+		float:right;
+	}
+	
+	.controls_container {
+		margin-left: 150px;
+		width: 400px;
+		margin-top: 70px;
+		text-align : center;
+		
+		.buttons_container {
+			margin-top:15px;
+			width: 150px;
+			text-align:left;
+			margin-left:120px;
+		}
 	}
 }
