@@ -57,6 +57,13 @@ var UpdateAIPlayersDescisions = Visitor.$extend({
 		}
 		
 		debug("Update players desisions")
+
+		if (game_object.current_player.group==1) {
+
+			jQuery(".player_decision").text("Кликните чтобы узнать решение игрока");
+			return;
+		}
+		
 		for (var p in game_object.players) {
 			var player = game_object.players[p];
 			
@@ -66,6 +73,7 @@ var UpdateAIPlayersDescisions = Visitor.$extend({
 				jQuery("."+player.name+" .player_decision").text("Не буду делать ставку");
 			}
 		}
+		
 	}
 });
 
@@ -141,22 +149,72 @@ var EnableBidControls = Visitor.$extend({
 	
 	visit : function(game,game_engine,game_object) {
 		debug("Enabling bid controls:"+game_object.state.bid_controls_enabled)
-		if (game_object.state.bid_controls_enabled) {
-			jQuery("#bid_controls").show();
+		
+		if (game_object.current_player.group==1) {
+			jQuery(".player_decision").text("Кликните чтобы узнать решение игрока")
+			
+			for (var p in game_object.players) {
+				var player = game_object.players[p];
+
+				jQuery("."+player.name+" .player_decision").attr("rel",p).click(function() {
+					player = game_object.players[jQuery(this).attr("rel")];
+					jQuery("."+player.name+" .player_decision").unbind("click");					
+					jQuery(".player_decision").hide();
+					if ((player.truth && player.logic[game_object.state.round_count]==1) || (!player.truth && player.logic[game_object.state.round_count]==0)) {
+		 				jQuery("."+player.name+" .player_decision").text("Буду делать ставку").show();
+					} else {
+						jQuery("."+player.name+" .player_decision").text("Не буду делать ставку").show();
+					}
+					
+					
+					if (game_object.state.bid_controls_enabled) {
+						jQuery("#bid_controls").show();
+					} else {
+						jQuery("#bid_controls").hide();
+					}
+
+					if (!this.listeners_inited) {
+
+						jQuery("#make_bid").live("click", function() {
+							game_engine.action("bid")
+						});
+
+						jQuery("#not_make_bid").live("click", function() {
+							game_engine.action("not_bid")
+						});
+						this.listeners_inited = true
+					}
+				});
+
+				if ((player.truth && player.logic[game_object.state.round_count]==1) || (!player.truth && player.logic[game_object.state.round_count]==0)) {
+	 				jQuery("."+player.name+" .player_decision").text("Буду делать ставку");
+				} else {
+					jQuery("."+player.name+" .player_decision").text("Не буду делать ставку");
+				}
+			}
+			
+			
+			return;
 		} else {
-			jQuery("#bid_controls").hide();
-		}
+					
+			if (game_object.state.bid_controls_enabled) {
+				jQuery("#bid_controls").show();
+			} else {
+				jQuery("#bid_controls").hide();
+			}
 		
-		if (!this.listeners_inited) {
+			if (!this.listeners_inited) {
 		
-			jQuery("#make_bid").live("click", function() {
-				game_engine.action("bid")
-			});
+				jQuery("#make_bid").live("click", function() {
+					game_engine.action("bid")
+				});
 		
-			jQuery("#not_make_bid").live("click", function() {
-				game_engine.action("not_bid")
-			});
-			this.listeners_inited = true
+				jQuery("#not_make_bid").live("click", function() {
+					game_engine.action("not_bid")
+				});
+				this.listeners_inited = true
+			}
+		
 		}
 	}
 });
@@ -240,7 +298,7 @@ var GameEngine = Class.$extend({
 	
 	showGame : function() {
 		debug("Starting game");
-		this.hideLoading();
+		this.hideLoading(); 
 		jQuery("#game_board").show();
 		
 		this.resolveGame();

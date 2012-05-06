@@ -10,13 +10,14 @@ class GameController < ApplicationController
   
   
   class Player
-    attr_accessor :name,:money,:desisions, :bids
+    attr_accessor :name,:money,:desisions, :bids, :group
     
     def initialize(name)
       @name = name
       @money = 50
       @desisions = []
       @bids = []
+      @group = [1,2][rand(2)]
     end
   end
   
@@ -192,7 +193,7 @@ private
         end
       else
         g.state.waiting_time = Time.now
-        g.state.waiting_duration = (1..30).to_a[rand(30)]*1000
+        g.state.waiting_duration = (1..5).to_a[rand(2)]*1000
 
       end
     elsif (g.state.name == 'bid')

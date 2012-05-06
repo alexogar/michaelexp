@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 Psychtest::Application.routes.draw do
+  get "database/database"
+
   get "questions/moneyChange"
   post "questions/moneySubmit"
   get "questions/firstRound"
